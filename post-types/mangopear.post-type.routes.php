@@ -141,7 +141,7 @@
 
 
 			$rewrite = array(
-				'slug'                       => 'routes/location',
+				'slug'                       => 'destinations',
 				'with_front'                 => true,
 				'hierarchical'               => true,
 			);
