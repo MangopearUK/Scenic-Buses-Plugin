@@ -78,7 +78,7 @@
 				'description'			=> __('Bus and train routes across the UK', 								'mangopear'),
 				'labels'				=> $labels,
 				'supports'				=> array('title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments'),
-				'taxonomies'			=> array('resource__types', 'resources__tags'),
+				'taxonomies'			=> array('route__locations'),
 				'hierarchical'			=> true,
 				'public'				=> true,
 				'show_ui'				=> true,
@@ -93,6 +93,7 @@
 				'publicly_queryable'	=> true,
 				'rewrite'				=> $rewrite,
 				'capability_type'		=> 'page',
+				'show_in_rest'			=> true,
 			);
 
 
