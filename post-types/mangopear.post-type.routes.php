@@ -8,9 +8,9 @@
 	 * @author  	Andi North <andi@mangopear.co.uk>
 	 * @copyright  	2017 Mangopear creative
 	 * @license   	GNU General Public License <http://opensource.org/licenses/gpl-license.php>
-	 * @version  	3.0.0
+	 * @version  	3.1.0
 	 * @link 		https://mangopear.co.uk/
-	 * @since   	3.0.0
+	 * @since   	3.1.0
 	 */
 	
 
@@ -166,6 +166,62 @@
 
 
 		add_action('init', 'mangopear_register_taxonomy_route_locations', 0);
+	}
+
+
+
+
+
+	/**
+	 * [3]	Register taxonomy: Route collections
+	 */
+	
+	if (! function_exists('mangopear_register_taxonomy_route_collections')) {
+		function mangopear_register_taxonomy_route_collections() {
+			$labels = array(
+				'name'                       => _x('Collections', 							'Taxonomy General Name', 	'mangopear'),
+				'singular_name'              => _x('Collection', 							'Taxonomy Singular Name', 	'mangopear'),
+				'menu_name'                  => __('Collections', 							'mangopear'),
+				'all_items'                  => __('All collections', 						'mangopear'),
+				'parent_item'                => __('Parent collection', 					'mangopear'),
+				'parent_item_colon'          => __('Parent collection:', 					'mangopear'),
+				'new_item_name'              => __('New collection', 						'mangopear'),
+				'add_new_item'               => __('Add new collection', 					'mangopear'),
+				'edit_item'                  => __('Edit collection', 						'mangopear'),
+				'update_item'                => __('Update collection', 					'mangopear'),
+				'separate_items_with_commas' => __('Separate collections with commas', 		'mangopear'),
+				'search_items'               => __('Search collections', 					'mangopear'),
+				'add_or_remove_items'        => __('Add or remove collections', 			'mangopear'),
+				'choose_from_most_used'      => __('Choose from the most used collections', 'mangopear'),
+				'not_found'                  => __('Category not found', 					'mangopear'),
+			);
+
+
+			$rewrite = array(
+				'slug'                       => 'collection',
+				'with_front'                 => true,
+				'hierarchical'               => true,
+			);
+
+
+			$args = array(
+				'labels'                     => $labels,
+				'hierarchical'               => true,
+				'public'                     => true,
+				'show_ui'                    => true,
+				'show_admin_column'          => true,
+				'show_in_nav_menus'          => true,
+				'show_tagcloud'              => false,
+				'query_var'                  => 'route__collections',
+				'rewrite'                    => $rewrite,
+			);
+
+
+			register_taxonomy('route__collections', array('routes'), $args);
+		}
+
+
+		add_action('init', 'mangopear_register_taxonomy_route_collections', 0);
 	}
 	
 ?>
