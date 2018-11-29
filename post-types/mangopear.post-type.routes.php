@@ -223,5 +223,61 @@
 
 		add_action('init', 'mangopear_register_taxonomy_route_collections', 0);
 	}
+
+
+
+
+
+	/**
+	 * [4]	Register taxonomy: Operators
+	 */
+	
+	if (! function_exists('mangopear_register_taxonomy_operators')) {
+		function mangopear_register_taxonomy_operators() {
+			$labels = array(
+				'name'                       => _x('Operators', 							'Taxonomy General Name', 	'mangopear'),
+				'singular_name'              => _x('Operator', 								'Taxonomy Singular Name', 	'mangopear'),
+				'menu_name'                  => __('Operators', 							'mangopear'),
+				'all_items'                  => __('All operators', 						'mangopear'),
+				'parent_item'                => __('Parent operator', 					'mangopear'),
+				'parent_item_colon'          => __('Parent operator:', 					'mangopear'),
+				'new_item_name'              => __('New operator', 						'mangopear'),
+				'add_new_item'               => __('Add new operator', 					'mangopear'),
+				'edit_item'                  => __('Edit operator', 						'mangopear'),
+				'update_item'                => __('Update operator', 					'mangopear'),
+				'separate_items_with_commas' => __('Separate operators with commas', 		'mangopear'),
+				'search_items'               => __('Search operators', 					'mangopear'),
+				'add_or_remove_items'        => __('Add or remove operators', 			'mangopear'),
+				'choose_from_most_used'      => __('Choose from the most used operators', 'mangopear'),
+				'not_found'                  => __('Category not found', 					'mangopear'),
+			);
+
+
+			$rewrite = array(
+				'slug'                       => 'operator',
+				'with_front'                 => true,
+				'hierarchical'               => true,
+			);
+
+
+			$args = array(
+				'labels'                     => $labels,
+				'hierarchical'               => true,
+				'public'                     => true,
+				'show_ui'                    => true,
+				'show_admin_column'          => true,
+				'show_in_nav_menus'          => true,
+				'show_tagcloud'              => true,
+				'query_var'                  => 'operators',
+				'rewrite'                    => $rewrite,
+			);
+
+
+			register_taxonomy('operators', array('routes'), $args);
+		}
+
+
+		add_action('init', 'mangopear_register_taxonomy_operators', 0);
+	}
 	
 ?>
