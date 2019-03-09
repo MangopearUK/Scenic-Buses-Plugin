@@ -19,6 +19,7 @@
 	 *
 	 * [1]	Register post type: Routes
 	 * [2]	Register taxonomy: Route locations
+	 * [5]	Register taxonomy: Tickets
 	 */
 	
 
@@ -198,7 +199,7 @@
 
 
 			$rewrite = array(
-				'slug'                       => 'collection',
+				'slug'                       => 'collections',
 				'with_front'                 => true,
 				'hierarchical'               => true,
 			);
@@ -278,6 +279,62 @@
 
 
 		add_action('init', 'mangopear_register_taxonomy_operators', 0);
+	}
+
+
+
+
+
+	/**
+	 * [5]	Register taxonomy: Tickets
+	 */
+	
+	if (! function_exists('mangopear_register_taxonomy_tickets')) {
+		function mangopear_register_taxonomy_tickets() {
+			$labels = array(
+				'name'                       => _x('Tickets', 							'Taxonomy General Name', 	'mangopear'),
+				'singular_name'              => _x('Ticket', 							'Taxonomy Singular Name', 	'mangopear'),
+				'menu_name'                  => __('Tickets', 							'mangopear'),
+				'all_items'                  => __('All tickets', 						'mangopear'),
+				'parent_item'                => __('Parent ticket', 					'mangopear'),
+				'parent_item_colon'          => __('Parent ticket:', 					'mangopear'),
+				'new_item_name'              => __('New ticket', 						'mangopear'),
+				'add_new_item'               => __('Add new ticket', 					'mangopear'),
+				'edit_item'                  => __('Edit ticket', 						'mangopear'),
+				'update_item'                => __('Update ticket', 					'mangopear'),
+				'separate_items_with_commas' => __('Separate tickets with commas', 		'mangopear'),
+				'search_items'               => __('Search tickets', 					'mangopear'),
+				'add_or_remove_items'        => __('Add or remove tickets', 			'mangopear'),
+				'choose_from_most_used'      => __('Choose from the most used tickets', 'mangopear'),
+				'not_found'                  => __('Category not found', 				'mangopear'),
+			);
+
+
+			$rewrite = array(
+				'slug'                       => 'tickets',
+				'with_front'                 => true,
+				'hierarchical'               => true,
+			);
+
+
+			$args = array(
+				'labels'                     => $labels,
+				'hierarchical'               => true,
+				'public'                     => true,
+				'show_ui'                    => true,
+				'show_admin_column'          => true,
+				'show_in_nav_menus'          => true,
+				'show_tagcloud'              => true,
+				'query_var'                  => 'tickets',
+				'rewrite'                    => $rewrite,
+			);
+
+
+			register_taxonomy('tickets', array('routes'), $args);
+		}
+
+
+		add_action('init', 'mangopear_register_taxonomy_tickets', 0);
 	}
 	
 ?>
