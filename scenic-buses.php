@@ -55,3 +55,17 @@
 	 */
 
 	require_once $plugin_path . 'post-types/mangopear.post-type.routes.php'; 	// [a]
+
+
+
+
+
+	/**
+	 * [3]	Register an options page for ACF
+	 *
+	 * 		@since 1.0.0
+	 *
+	 * 		[a]	Add our include
+	 */
+
+	require_once $plugin_path . 'settings/settings.options-page.php'; 		// [a]
