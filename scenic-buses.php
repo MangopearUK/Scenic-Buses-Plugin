@@ -69,3 +69,34 @@
 	 */
 
 	require_once $plugin_path . 'settings/settings.options-page.php'; 		// [a]
+
+
+
+
+
+	/**
+	 * [4]	Add custom CSS to admin for routes list
+	 *
+	 * 		@since 1.1.0
+	 *
+	 * 		[a]	
+	 */
+	
+	add_action('admin_head', 'scenic_custom_admin_css');
+
+	function scenic_custom_admin_css() {
+		echo '
+			<style>
+				/* Green for published routes */
+				.wp-list-table.pages .status-publish th.check-column { border-left: 5px solid #499e00;  }
+				.wp-list-table.pages .status-publish th,
+				.wp-list-table.pages .status-publish td              { background: rgb(73 158 0 / .15); }
+
+
+				/* Red for "Initial add for prep" */
+				.wp-list-table.pages .status-initial-add-for-prep th.check-column { border-left: 5px solid #F27500;  }
+				.wp-list-table.pages .status-initial-add-for-prep th,
+				.wp-list-table.pages .status-initial-add-for-prep td              { background: rgb(242 117 0 / .15); }
+			</style>
+		';
+	}
