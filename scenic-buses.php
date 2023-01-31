@@ -29,6 +29,9 @@
 	 *
 	 * [1]	Global variables
 	 * [2]	Post type registration
+	 * [3]	Register an options page for ACF
+	 * [4]	Register our custom listing editing functionality
+	 * [5]	Add custom CSS to admin for routes list
 	 */
 	
 
@@ -75,7 +78,21 @@
 
 
 	/**
-	 * [4]	Add custom CSS to admin for routes list
+	 * [4]	Register our custom listing editing functionality
+	 *
+	 * 		@since 1.0.0
+	 *
+	 * 		[a]	Add our include
+	 */
+
+	require_once $plugin_path . 'listing-editing/class.listing-editing.php'; 	// [a]
+
+
+
+
+
+	/**
+	 * [5]	Add custom CSS to admin for routes list
 	 *
 	 * 		@since 1.1.0
 	 *
