@@ -38,6 +38,8 @@
 	 * [2]	Include other files
 	 *
 	 * 		[a]	Custom URL endpoints for editing views
+	 * 		[b]	Process uploaded media
 	 */
 
-	require_once $plugin_path . 'functions.custom-url-endpoints.php'; 	// [a]
+	require_once $plugin_path . 'functions.custom-url-endpoints.php'; 			// [a]
+	require_once $plugin_path . 'functions.media-library.process-upload.php'; 	// [b]
