@@ -85,4 +85,4 @@
 	 * 		[a]	Add our include
 	 */
 
-	require_once $plugin_path . 'listing-editing/class.listing-editing.php'; 	// [a]
+	require_once $plugin_path . 'listing-editing/listing-editing.php'; 	// [a]

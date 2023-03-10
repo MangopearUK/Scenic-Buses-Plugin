@@ -26,76 +26,78 @@
 	 *
 	 * 		[a]	Include required WordPress core files
 	 * 		[b]	If no files were included in form, kill the process and show an error
-	 * 		[c]	Hook into default WordPress function, calling our files in the response and
+	 * 		[c]	Loop through each uploaded image
+	 * 		[d]	Set up file data based on complex $_FILES array data structure
+	 * 		[e]	Hook into default WordPress function, calling our files in the response and
 	 * 			a default parameter that is required, don't know why though...
-	 * 		[d]	If there's an error from [c], kill process and output error
-	 * 		[e]	Insert media into WordPress core media library
-	 * 		[f]	If upload errors out, kill process and show message
-	 * 		[g]	Process media meta data
-	 * 		[h]	Redirect to media library
-	 * 		[i]	Exit process, for security
+	 * 		[f]	If there's an error from [c], kill process and output error
+	 * 		[g]	Insert media into WordPress core media library
+	 * 		[h]	If upload errors out, kill process and show message
+	 * 		[i]	Process media meta data
+	 * 		[j]	Redirect to media library
+	 * 		[k]	Exit process, for security
 	 */
 	
 	function scenic_process_media_upload() {
-		require(dirname(__FILE__) . '/../../../../wp-load.php');				// [a]
-		require_once(ABSPATH . 'wp-admin/includes/file.php');					// [a]
-		require_once(ABSPATH . 'wp-admin/includes/image.php');					// [a]
+		require(dirname(__FILE__) . '/../../../../wp-load.php');						// [a]
+		require_once(ABSPATH . 'wp-admin/includes/file.php');							// [a]
+		require_once(ABSPATH . 'wp-admin/includes/image.php');							// [a]
 
 
-		if (empty($_FILES['upload'])) :											// [b]
-			wp_die('No files were selected.');									// [b]
-		endif;																	// [b]
+		if (empty($_FILES['upload'])) :													// [b]
+			wp_die('No files were selected.');											// [b]
+		endif;																			// [b]
 
 
-		foreach ($_FILES['upload']['name'] as $key => $value) :					// []
-			if ($_FILES['upload']['name'][$key]) :
-				$file_to_upload = array(
-					'name'		=> $_FILES['upload']['name'][$key],
-					'type'		=> $_FILES['upload']['type'][$key],
-					'tmp_name'	=> $_FILES['upload']['tmp_name'][$key],
-					'error'		=> $_FILES['upload']['error'][$key],
-					'size'		=> $_FILES['upload']['size'][$key]
-				);
+		foreach ($_FILES['upload']['name'] as $key => $value) :							// [c]
+			if ($_FILES['upload']['name'][$key]) :										// [c]
+				$file_to_upload = array(												// [d]
+					'name'		=> $_FILES['upload']['name'][$key],						// [d]
+					'type'		=> $_FILES['upload']['type'][$key],						// [d]
+					'tmp_name'	=> $_FILES['upload']['tmp_name'][$key],					// [d]
+					'error'		=> $_FILES['upload']['error'][$key],					// [d]
+					'size'		=> $_FILES['upload']['size'][$key]						// [d]
+				);																		// [d]
 
 
-				$upload = wp_handle_upload(												// [c]
-					$file_to_upload,													// [c]
-					array('test_form' => false)											// [c]
-				);																		// [c]
-
-
-				if (! empty($upload['error'])) :										// [d]
-					wp_die($upload['error']);											// [d]
-				endif;																	// [d]
-
-
-				$attachment_id = wp_insert_attachment(									// [e]
-					array(																// [e]
-						'guid'           => $upload['url'],								// [e]
-						'post_mime_type' => $upload['type'],							// [e]
-						'post_title'     => basename($upload['file']),					// [e]
-						'post_content'   => '',											// [e]
-						'post_status'    => 'inherit',									// [e]
-					),																	// [e]
-					$upload['file']														// [e]
+				$upload = wp_handle_upload(												// [e]
+					$file_to_upload,													// [e]
+					array('test_form' => false)											// [e]
 				);																		// [e]
 
 
-				if (is_wp_error($attachment_id) || ! $attachment_id) :					// [f]
-					wp_die('Upload error. Please try again.');							// [f]
+				if (! empty($upload['error'])) :										// [f]
+					wp_die($upload['error']);											// [f]
 				endif;																	// [f]
 
 
-				wp_update_attachment_metadata(											// [g]
-					$attachment_id,														// [g]
-					wp_generate_attachment_metadata($attachment_id, $upload['file'])	// [g]
+				$attachment_id = wp_insert_attachment(									// [g]
+					array(																// [g]
+						'guid'           => $upload['url'],								// [g]
+						'post_mime_type' => $upload['type'],							// [g]
+						'post_title'     => basename($upload['file']),					// [g]
+						'post_content'   => '',											// [g]
+						'post_status'    => 'inherit',									// [g]
+					),																	// [g]
+					$upload['file']														// [g]
 				);																		// [g]
 
 
-			endif;								
-		endforeach;																// []
+				if (is_wp_error($attachment_id) || ! $attachment_id) :					// [h]
+					wp_die('Upload error. Please try again.');							// [h]
+				endif;																	// [h]
 
 
-		wp_safe_redirect('/your-account/listings/media/my/library/');			// [h]
-		exit;																	// [i]
+				wp_update_attachment_metadata(											// [i]
+					$attachment_id,														// [i]
+					wp_generate_attachment_metadata($attachment_id, $upload['file'])	// [i]
+				);																		// [i]
+
+
+			endif;																		// [c]
+		endforeach;																		// [c]
+
+
+		wp_safe_redirect('/your-account/listings/media/my/library/');					// [j]
+		exit;																			// [k]
 	}
