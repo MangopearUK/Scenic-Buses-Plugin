@@ -66,6 +66,35 @@
 
 
 			/**
+			 * [c]	Output form field
+			 */
+			
+			public function output_text_field($args = array()) {
+				$field__name = ($args['name'] != '') ? $args['name'] : $args['id'];
+				$field__id   = $args['id'];
+				$label       = $args['label'];
+				$message     = $args['help-message'];
+				$value       = $args['default-value'];
+
+
+				$html = '<div class="c-edit-form__field  c-edit-form__field--text" data-field="' . $field__id . '">';
+					$html .= '<label class="c-edit-form__label" for="' . $field__id . '">' . $label . '</label>';
+					$html .= '<input class="c-edit-form__input" type="text" id="' . $field__id . '" name="' . $field__name . '" value="' . $value . '">';
+
+
+					$html .= '<div class="c-edit-form__helper">' . $message . '</div>';
+					$html .= '<p class="c-edit-form__inline-error  js-edit-form__inline-error"></p>';
+				$html .= '</div>';
+
+
+				return $html;
+			}
+
+
+
+
+
+			/**
 			 * [c]	Form handler: Media > Edit item meta data
 			 */
 			
