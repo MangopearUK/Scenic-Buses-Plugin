@@ -59,6 +59,7 @@
 			
 			public function initialize() {
 				add_action('admin_post_scenic_listings_media_meta', array($this, 'edit_media_meta'));
+				add_action('wp_ajax_scenic_create_edit_dialog',     array($this, 'create_edit_dialog'));
 			}
 
 
@@ -100,6 +101,51 @@
 
 
 				return $html;
+			}
+
+
+
+
+
+			/**
+			 * [d]	Handle AJAX request to create edit modals
+			 */
+			
+			public function create_edit_dialog() {
+				$nonce = $_REQUEST['nonce'];
+
+
+				if (! wp_verify_nonce($nonce, 'scenic-global-nonce')) {
+					die('Security key could not be validated. Refresh the page and try again.');
+				}
+
+
+				if (isset($_REQUEST)) :
+					$edit_type  = $_REQUEST['editType'];
+					$edit_id    = $_REQUEST['editID'];
+					$edit_field = $_REQUEST['editField'];
+					$edit_title = $_REQUEST['editTitle'];
+
+
+					$partial_endpoint = $edit_type . '/fields/' . $edit_field;
+					$template_partial = 'template-partials/edit-listings/' . $partial_endpoint;
+
+
+					echo get_template_part(
+						'template-partials/edit-listings/core/modal-insert',
+						'',
+						array(
+							'template-partial' 	=> $template_partial,
+							'edit-type'			=> $edit_type,
+							'edit-id'			=> $edit_id,
+							'edit-field'		=> $edit_field,
+							'edit-title'		=> $edit_title,
+						)
+					);
+				endif;
+
+
+				die();
 			}
 
 
