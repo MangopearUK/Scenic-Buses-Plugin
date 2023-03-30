@@ -58,7 +58,11 @@
 			 */
 			
 			public function initialize() {
-				add_action('admin_post_scenic_listings_media_meta', array($this, 'edit_media_meta'));
+				add_action('admin_post_scenic_listings_media_meta',     array($this, 'edit_media_meta'));
+				add_action('admin_post_scenic_listings_location_type',  array($this, 'listings_location_type'));
+				add_action('admin_post_scenic_listings_location_title', array($this, 'listings_location_title'));
+
+
 				add_action('wp_ajax_scenic_create_edit_dialog',     array($this, 'create_edit_dialog'));
 			}
 
@@ -176,6 +180,45 @@
 
 
 				wp_safe_redirect('/your-account/listings/media/' . $media_item_id . '/meta/?return=updated');
+			}
+
+
+
+
+
+			/**
+			 * [c]	Form handler: 
+			 */
+			
+			public function listings_location_type() {
+				$location_id = 'route__locations_' . $_POST['item-id'];
+
+
+				$type__root_level  = $_POST['location-type'];
+				$type__destination = $_POST['type__destination'];
+				$type__attraction  = $_POST['type__attraction'];
+
+
+				update_field('type',              $type__root_level,  $location_id);
+				update_field('type--destination', $type__destination, $location_id);
+				update_field('type--attraction',  $type__attraction,  $location_id);
+
+
+				wp_safe_redirect('/your-account/listings/locations/' . $_POST['item-id'] . '/edit/?type=updated');
+			}
+
+
+
+
+
+			/**
+			 * []	Form handler: Locations > Edit title
+			 */
+			
+			public function listings_location_title() {
+				$location_id = 'route__locations_' . $_POST['item-id'];
+				update_field('expressive-title', $_POST['title'], $location_id);
+				wp_safe_redirect('/your-account/listings/locations/' . $_POST['item-id'] . '/edit/?type=updated');
 			}
 
 		} 	// [2]
