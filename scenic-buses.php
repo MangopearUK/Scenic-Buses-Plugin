@@ -78,7 +78,21 @@
 
 
 	/**
-	 * [4]	Register our custom listing editing functionality
+	 * [4]	Other custom functionality
+	 *
+	 * 		@since 10.0.0
+	 *
+	 * 		[a]	Custom user password reset process
+	 */
+
+	require_once $plugin_path . 'functions/functions.custom-password-reset-flow.php'; 	// [a]
+
+
+
+
+
+	/**
+	 * [5]	Register our custom listing editing functionality
 	 *
 	 * 		@since 1.0.0
 	 *
