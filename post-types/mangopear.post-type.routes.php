@@ -255,7 +255,7 @@
 
 
 			$rewrite = array(
-				'slug'                       => 'operator',
+				'slug'                       => 'operators',
 				'with_front'                 => true,
 				'hierarchical'               => true,
 			);
