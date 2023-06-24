@@ -79,7 +79,7 @@
 				'description'			=> __('Bus and train routes across the UK', 								'mangopear'),
 				'labels'				=> $labels,
 				'supports'				=> array('title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments'),
-				'taxonomies'			=> array('route__locations'),
+				'taxonomies'			=> array('route__locations', 'route__genres', 'route__collections', 'tickets', 'operators'),
 				'hierarchical'			=> true,
 				'public'				=> true,
 				'show_ui'				=> true,
@@ -335,6 +335,62 @@
 
 
 		add_action('init', 'mangopear_register_taxonomy_tickets', 0);
+	}
+
+
+
+
+
+	/**
+	 * [3]	Register taxonomy: Route genres
+	 */
+	
+	if (! function_exists('mangopear_register_taxonomy_route_genres')) {
+		function mangopear_register_taxonomy_route_genres() {
+			$labels = array(
+				'name'                       => _x('Genres', 							'Taxonomy General Name', 	'mangopear'),
+				'singular_name'              => _x('Genre', 							'Taxonomy Singular Name', 	'mangopear'),
+				'menu_name'                  => __('Genres', 							'mangopear'),
+				'all_items'                  => __('All genres', 						'mangopear'),
+				'parent_item'                => __('Parent genre', 					'mangopear'),
+				'parent_item_colon'          => __('Parent genre:', 					'mangopear'),
+				'new_item_name'              => __('New genre', 						'mangopear'),
+				'add_new_item'               => __('Add new genre', 					'mangopear'),
+				'edit_item'                  => __('Edit genre', 						'mangopear'),
+				'update_item'                => __('Update genre', 					'mangopear'),
+				'separate_items_with_commas' => __('Separate genres with commas', 		'mangopear'),
+				'search_items'               => __('Search genres', 					'mangopear'),
+				'add_or_remove_items'        => __('Add or remove genres', 			'mangopear'),
+				'choose_from_most_used'      => __('Choose from the most used genres', 'mangopear'),
+				'not_found'                  => __('Category not found', 					'mangopear'),
+			);
+
+
+			$rewrite = array(
+				'slug'                       => 'genres',
+				'with_front'                 => true,
+				'hierarchical'               => true,
+			);
+
+
+			$args = array(
+				'labels'                     => $labels,
+				'hierarchical'               => true,
+				'public'                     => true,
+				'show_ui'                    => true,
+				'show_admin_column'          => true,
+				'show_in_nav_menus'          => true,
+				'show_tagcloud'              => false,
+				'query_var'                  => 'route__genres',
+				'rewrite'                    => $rewrite,
+			);
+
+
+			register_taxonomy('route__genres', array('routes'), $args);
+		}
+
+
+		add_action('init', 'mangopear_register_taxonomy_route_genres', 0);
 	}
 	
 ?>
