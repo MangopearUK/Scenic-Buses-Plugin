@@ -38,7 +38,7 @@
 		'menu_title'		=> 'Scenic Buses',
 		'menu_slug'			=> 'scenic-buses',
 		'capability'		=> 'edit_posts',
-		'position'			=> '37.5',
+		'position'			=> '46',
 		'icon_url'			=> 'dashicons-location',
 		'post_id' 			=> 'options',
 		'update_button'		=> 'Save settings',
@@ -91,10 +91,18 @@
 
 	function scenic__add_admin_seperator() {
 		global $menu;
-		$position = 37;
 
 
-		$menu[ $position ] = array(
+		$menu[44] = array(
+			0	=>	'',							// [e]
+			1	=>	'read',						// [f]
+			2	=>	'separator' . $position,	// [g]
+			3	=>	'',							// [h]
+			4	=>	'wp-menu-separator'			// [i]
+		);
+
+
+		$menu[47] = array(
 			0	=>	'',							// [e]
 			1	=>	'read',						// [f]
 			2	=>	'separator' . $position,	// [g]

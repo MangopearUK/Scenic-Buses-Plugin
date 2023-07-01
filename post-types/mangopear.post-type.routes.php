@@ -87,7 +87,7 @@
 				'menu_icon'				=> 'dashicons-location-alt',
 				'show_in_nav_menus'		=> false,
 				'show_in_admin_bar'		=> true,
-				'menu_position'			=> 48,
+				'menu_position'			=> 45,
 				'can_export'			=> true,
 				'has_archive'			=> true,
 				'exclude_from_search'	=> false,
