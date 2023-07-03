@@ -38,7 +38,7 @@
 		'menu_title'		=> 'Scenic Buses',
 		'menu_slug'			=> 'scenic-buses',
 		'capability'		=> 'edit_posts',
-		'position'			=> '46',
+		'position'			=> '47',
 		'icon_url'			=> 'dashicons-location',
 		'post_id' 			=> 'options',
 		'update_button'		=> 'Save settings',
@@ -102,7 +102,7 @@
 		);
 
 
-		$menu[47] = array(
+		$menu[48] = array(
 			0	=>	'',							// [e]
 			1	=>	'read',						// [f]
 			2	=>	'separator' . $position,	// [g]
