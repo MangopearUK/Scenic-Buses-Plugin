@@ -159,6 +159,7 @@
 				'show_tagcloud'              => false,
 				'query_var'                  => 'route__locations',
 				'rewrite'                    => $rewrite,
+				'show_in_rest'				 => true,
 			);
 
 
@@ -215,6 +216,7 @@
 				'show_tagcloud'              => false,
 				'query_var'                  => 'route__collections',
 				'rewrite'                    => $rewrite,
+				'show_in_rest'				 => true,
 			);
 
 
@@ -271,6 +273,7 @@
 				'show_tagcloud'              => true,
 				'query_var'                  => 'operators',
 				'rewrite'                    => $rewrite,
+				'show_in_rest'				 => true,
 			);
 
 
@@ -327,6 +330,7 @@
 				'show_tagcloud'              => true,
 				'query_var'                  => 'tickets',
 				'rewrite'                    => $rewrite,
+				'show_in_rest'				 => true,
 			);
 
 
@@ -383,6 +387,7 @@
 				'show_tagcloud'              => false,
 				'query_var'                  => 'route__genres',
 				'rewrite'                    => $rewrite,
+				'show_in_rest'				 => true,
 			);
 
 
