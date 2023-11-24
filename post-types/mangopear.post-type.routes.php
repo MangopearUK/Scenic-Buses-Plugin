@@ -84,7 +84,7 @@
 				'public'				=> true,
 				'show_ui'				=> true,
 				'show_in_menu'			=> true,
-				'menu_icon'				=> 'dashicons-location-alt',
+				'menu_icon'				=> 'dashicons-rest-api',
 				'show_in_nav_menus'		=> false,
 				'show_in_admin_bar'		=> true,
 				'menu_position'			=> 45,
