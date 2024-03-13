@@ -45,3 +45,4 @@
 	require_once $plugin_path . 'functions.custom-url-endpoints.php'; 			// [a]
 	require_once $plugin_path . 'functions.media-library.process-upload.php'; 	// [b]
 	require_once $plugin_path . 'class.listing-editing.forms.php'; 				// [c]
+	require_once $plugin_path . 'functions.stock-image-apis.php'; 				// [d]
