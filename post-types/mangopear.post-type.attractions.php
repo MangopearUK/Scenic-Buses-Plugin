@@ -76,7 +76,7 @@
 				'label'					=> __('Attractions',																'scenic'),
 				'description'			=> __('Attractions you can reach on the UK & Ireland\'s most scenic bus routes.',	'scenic'),
 				'labels'				=> $labels,
-				'supports'				=> array('title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments'),
+				'supports'				=> array('title', 'editor', 'author', 'thumbnail', 'excerpt'),
 				'taxonomies'			=> array('route__locations'),
 				'hierarchical'			=> true,
 				'public'				=> true,

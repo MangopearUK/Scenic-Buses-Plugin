@@ -76,7 +76,7 @@
 				'label'					=> __('Travelogues',																									'scenic'),
 				'description'			=> __('Find inspiration for scenic days out by bus from across the UK & Ireland in these carefully crafted articles.', 	'scenic'),
 				'labels'				=> $labels,
-				'supports'				=> array('title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments'),
+				'supports'				=> array('title', 'editor', 'author', 'thumbnail', 'excerpt'),
 				'taxonomies'			=> array('category', 'route__locations', 'route__genres', 'operators'),
 				'hierarchical'			=> false,
 				'public'				=> true,
