@@ -314,7 +314,7 @@ function scenic_handle_ajax_scenic_stock_api_add_to_library() {
 
 	if (isset($_REQUEST)) :																							// [ii]
 		$request_type 		 = $_REQUEST['type'];																	// []
-		$location_id 		 = $_REQUEST['locationID'];																// []
+		$location_id 		 = intval($_REQUEST['locationID']);														// []
 
 		$image_source        = $_REQUEST['imageSource'];															// []
 		$image_fee           = $_REQUEST['imageFee'];																// []
@@ -347,6 +347,7 @@ function scenic_handle_ajax_scenic_stock_api_add_to_library() {
 			switch ($image_source) :
 				case "Unsplash" :
 					$attachment_id = media_sideload_image($image_download . '.jpeg', 0, 0, 'id');
+					update_field('unsplash-url', 	$image_asset__raw, 	$attachment_id);
 					break;
 
 				default :
@@ -356,19 +357,43 @@ function scenic_handle_ajax_scenic_stock_api_add_to_library() {
 
 
 
-			update_field('copyright', 		$image_name, 		$attachment_id);
-			update_field('copyright__url', 	$image_library, 	$attachment_id);
+			update_field('copyright', 		$image_name, 	           $attachment_id);
+			update_field('copyright__url', 	$image_library,            $attachment_id);
 
-			update_field('asset-id', 		$image_id, 			$attachment_id);
+			update_field('asset-id', 		$image_id, 		           $attachment_id);
+			update_field('source', 			strtolower($image_source), $attachment_id);
 
-			update_field('source', 			$image_source, 		$attachment_id);
-			update_field('unsplash-url', 	$image_asset__raw, 	$attachment_id);
-		endif;																										// [c]
-	endif;																											// [ii]
+
+			$location_obj = get_term_by('term_id', $location_id, 'route__locations');
+
+		//	$locations    = array();
+		//	$locations[]  = $location_id;
+		//	$locations[]  = get_term_by('term_id', $location_obj->parent, 'route__locations')->term_id;
+
+		//	update_field('field_639da280c74b8', $locations, $attachment_id);
+			update_field('field_639da280c74b8', $location_id, $attachment_id);
+
+
+			$current_ids_only  = array();																		// []
+			$gallery_asset_ids = array();																		// []
+			$media_ids         = array($attachment_id);
+
+			foreach (get_field('gallery', 'route__locations_' . $location_id) as $image) {						// []
+				$current_ids_only[] = $image['id'];																// []
+			}																									// []
+
+			$new_media_ids = array_unique(array_merge($current_ids_only, $media_ids));							// []
+			foreach ($new_media_ids as $id) { $gallery_asset_ids[] = intval($id); }								// []
+
+			update_field('gallery', $gallery_asset_ids, 'route__locations_' . $location_id);					// []
+		endif;																									// []
+	endif;																										// []
 
 
 	wp_send_json_success(array(
 		'attachment_id' => $attachment_id,
+		'location_id'	=> $location_id,
+		'locations'		=> $locations,
 	), 200);
 }
 
