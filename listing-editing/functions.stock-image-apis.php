@@ -319,6 +319,7 @@ function scenic_handle_ajax_scenic_stock_api_add_to_library() {
 	if (isset($_REQUEST)) :																							// [ii]
 		$request_type 		 = $_REQUEST['type'];																	// []
 		$location_id 		 = intval($_REQUEST['locationID']);														// []
+		$attraction_id 		 = intval($_REQUEST['attractionID']);													// []
 
 		$image_source        = $_REQUEST['imageSource'];															// []
 		$image_fee           = $_REQUEST['imageFee'];																// []
@@ -373,18 +374,30 @@ function scenic_handle_ajax_scenic_stock_api_add_to_library() {
 			$gallery_asset_ids = array();																		// []	New empty array for creating ACF field data
 			$media_ids         = array($attachment_id);															// []	Cast to array
 
-			update_field('field_639da280c74b8', $location_id, $attachment_id);
+			switch ($request_type) :
+				case "addToLocation" :
+					$current_gallery = get_field('gallery', 'route__locations_' . $location_id);						// []	Get current gallery items
+					foreach ($current_gallery as $image) { $current_ids_only[] = $image['id']; }						// []	Loop through current gallery, fetching media ID and store to array
+
+					$new_media_ids = array_unique(array_merge($current_ids_only, $media_ids));							// []	Make sure the selected image isn't already in the gallery
+					foreach ($new_media_ids as $id) { $gallery_asset_ids[] = intval($id); }								// []	Build new array of media IDs
+					update_field('gallery', $gallery_asset_ids, 'route__locations_' . $location_id);					// []	Update field
+					break;
+
+
+				case "addToAttraction" :
+					$current_gallery = get_field('gallery', $attraction_id);											// []	Get current gallery items
+					foreach ($current_gallery as $image) { $current_ids_only[] = $image['id']; }						// []	Loop through current gallery, fetching media ID and store to array
+
+					$new_media_ids = array_unique(array_merge($current_ids_only, $media_ids));							// []	Make sure the selected image isn't already in the gallery
+					foreach ($new_media_ids as $id) { $gallery_asset_ids[] = intval($id); }								// []	Build new array of media IDs
+					update_field('gallery', $gallery_asset_ids, $attraction_id);										// []	Update field
+					break;
+			endswitch;
 
 
 
-			foreach (get_field('gallery', 'route__locations_' . $location_id) as $image) {						// []
-				$current_ids_only[] = $image['id'];																// []
-			}																									// []
-
-			$new_media_ids = array_unique(array_merge($current_ids_only, $media_ids));							// []
-			foreach ($new_media_ids as $id) { $gallery_asset_ids[] = intval($id); }								// []
-
-			update_field('gallery', $gallery_asset_ids, 'route__locations_' . $location_id);					// []
+			update_field('field_639da280c74b8', $location_id, $attachment_id);		// Add location ID to media meta
 		endif;																									// []
 	endif;																										// []
 
