@@ -238,11 +238,11 @@ function scenic_handle_ajax_scenic_stock_api_search() {
 		$page     = ($_REQUEST['page']) ?: 1;																		// []
 		$args     = array();																						// []
 
-		$images         = array();
-		$return         = array();
+		$images         = array();																					// []
+		$return         = array();																					// []
 
-		$returned_total = 0;
-		$found_total    = 0;
+		$returned_total = 0;																						// []
+		$found_total    = 0;																						// []
 
 
 		scenic_load_api_client();																					// []
@@ -367,19 +367,14 @@ function scenic_handle_ajax_scenic_stock_api_add_to_library() {
 			update_field('source', 			strtolower($image_source), $attachment_id);
 
 
-			$location_obj = get_term_by('term_id', $location_id, 'route__locations');
 
-		//	$locations    = array();
-		//	$locations[]  = $location_id;
-		//	$locations[]  = get_term_by('term_id', $location_obj->parent, 'route__locations')->term_id;
+			$current_ids_only  = array();																		// []	New empty array for filtering current gallery items
+			$gallery_asset_ids = array();																		// []	New empty array for creating ACF field data
+			$media_ids         = array($attachment_id);															// []	Cast to array
 
-		//	update_field('field_639da280c74b8', $locations, $attachment_id);
 			update_field('field_639da280c74b8', $location_id, $attachment_id);
 
 
-			$current_ids_only  = array();																		// []
-			$gallery_asset_ids = array();																		// []
-			$media_ids         = array($attachment_id);
 
 			foreach (get_field('gallery', 'route__locations_' . $location_id) as $image) {						// []
 				$current_ids_only[] = $image['id'];																// []
