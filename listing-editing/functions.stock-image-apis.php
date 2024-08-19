@@ -109,6 +109,7 @@ function scenic_stock_api_search_unsplash($client, $search, $page, $args) {
 		return array(																								// [xv]
 			'images' 	=> $all_images,																				// [xv]
 			'response' 	=> $response,																				// [xv]
+			'page'		=> $query__page,																			// [xv]
 			'totals'	=> array(																					// [xv]
 				'found'		=> $response['result']['total'],														// [xv]
 				'returned'	=> count($response['result']['results']),												// [xv]
@@ -195,6 +196,7 @@ function scenic_stock_api_search_pixabay($client, $search, $page, $args) {
 		return array(																								// [xv]
 			'images' 	=> $all_images,																				// [xv]
 			'response' 	=> $response,																				// [xv]
+			'page'		=> $query__page,																			// [xv]
 			'totals'	=> array(																					// [xv]
 				'found'		=> $response['result']['totalHits'],													// [xv]
 				'returned'	=> count($response['result']['hits']),													// [xv]
@@ -233,7 +235,7 @@ function scenic_handle_ajax_scenic_stock_api_search() {
 	else :																											// [ii]
 		$networks = $_REQUEST['networks'];																			// []
 		$search   = $_REQUEST['location'];																			// []
-		$page     = 1;																								// []
+		$page     = ($_REQUEST['page']) ?: 1;																		// []
 		$args     = array();																						// []
 
 		$images         = array();
@@ -274,6 +276,7 @@ function scenic_handle_ajax_scenic_stock_api_search() {
 
 		wp_send_json_success(																						// []
 			array(																									// []
+				'page'		=> $page,																				// []
 				'images' 	=> $images,																				// []
 				'totals'	=> array(																				// []
 					'found'		=> $found_total,																	// []
