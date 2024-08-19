@@ -276,6 +276,7 @@ function scenic_handle_ajax_scenic_stock_api_search() {
 
 		wp_send_json_success(																						// []
 			array(																									// []
+				'search'	=> $_REQUEST['location'],																// []
 				'page'		=> $page,																				// []
 				'images' 	=> $images,																				// []
 				'totals'	=> array(																				// []
