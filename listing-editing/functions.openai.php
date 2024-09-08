@@ -32,7 +32,7 @@ function scenic_load_openai_client() {
 	require(plugin_dir_path(__FILE__) . '../helpers/openai/OpenAi.php');	// [i]
 	require(plugin_dir_path(__FILE__) . '../helpers/openai/Url.php');		// [i]
 
-	return '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';
+	return SCENIC_OPENAI_API_KEY;
 }
 
 
