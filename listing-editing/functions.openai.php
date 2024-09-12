@@ -68,11 +68,11 @@ function scenic_handle_ajax_scenic_openai_location_subtitle() {
 			'messages' 			=> array(
 				array(
 					'role'	  => 'user',
-					'content' => "Write a 15 to 22 word long headline for $location_name, based on tourism by bus, all in British English and sentence case.",
+					'content' => "Write a 15 to 22 word long headline for $location_name, based on tourism by bus, all in British English and sentence case. Make it very creative. No quote marks around the text.",
 				),
 			),
 			'n'					=> 3,
-			'temperature' 		=> 0.9,
+			'temperature' 		=> 1.1,
 			'max_tokens' 		=> 150,
 			'frequency_penalty' => 0,
 			'presence_penalty' 	=> 0.6,
