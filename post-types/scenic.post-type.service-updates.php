@@ -63,7 +63,7 @@
 			$rewrite = array(
 				'slug'					=> 'updates',
 				'with_front'			=> true,
-				'pages'					=> false,
+				'pages'					=> true,
 				'feeds'					=> true,
 			);
 
