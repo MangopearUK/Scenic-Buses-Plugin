@@ -130,7 +130,7 @@ function scenic_handle_ajax_scenic_openai_location_content() {
 			'messages' 			=> array(
 				array(
 					'role'	  => 'user',
-					'content' => "Write a $length word long description for $location_name, based on tourism by bus, all in British English, sentence case and short paragraphs, formatted as simple HTML <p>.",
+					'content' => "Write a $length word long description for $location_name, based on tourism by bus, all in British English, sentence case and short paragraphs, formatted as simple HTML. Add a 15 to 22 word long headline, all in British English and sentence case. Make it very creative. No quote marks around the text. Wrap the headline in a <h3> with class 'js-ai-content__heading'. No line breaks characters between paragraphs, but wrap them in <p>. Wrap all the <p> elements (but not the <h3>) in a <div> with class 'js-ai-content__body'.",
 				),
 			),
 			'n'					=> 3,
